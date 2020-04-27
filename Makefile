@@ -19,7 +19,8 @@ release: compile
 	upx -9 lsha-linux-arm
 
 clean:
-	rm lsha-linux-amd64
-	rm lsha-linux-386
-	rm lsha-linux-arm
+	rm -f lsha-linux-amd64
+	rm -f lsha-linux-386
+	rm -f lsha-linux-arm
+	rm -f lsha
 
