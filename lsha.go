@@ -52,8 +52,6 @@ func hashFile(path string) string {
 	return hex.EncodeToString(hash.Sum(nil))
 }
 
-var lastKnownDir = ""
-
 func hashUndefined(rep string) string {
 	var hash string
 	for i := 0; i < 21; i++ {
@@ -61,6 +59,8 @@ func hashUndefined(rep string) string {
 	}
 	return hash
 }
+
+var lastKnownDir = ""
 
 func visitor(path string, info os.FileInfo, err error) error {
 	var hash = ""
@@ -89,13 +89,7 @@ func visitor(path string, info os.FileInfo, err error) error {
 }
 
 func main() {
-	if !doParsing() {
-		return
+	if doParsing() {
+		filepath.Walk(rootPath, visitor)
 	}
-
-	//fmt.Printf("Checksum: %v \n", doChecksum)
-	//fmt.Printf("rootPath: %v \n", rootPath)
-
-	filepath.Walk(rootPath, visitor)
-
 }
